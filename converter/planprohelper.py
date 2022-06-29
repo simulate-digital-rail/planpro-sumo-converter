@@ -7,7 +7,7 @@ y_shift = 5625780.0
 class PlanProHelper(object):
 
     def __init__(self, plan_pro_file_name):
-        self.root_object = planpromodel.parse(plan_pro_file_name + ".ppxml", silence=False)
+        self.root_object = planpromodel.parse(plan_pro_file_name + ".ppxml", silence=True)
 
     def get_number_of_fachdaten(self):
         return len(self.root_object.LST_Planung.Fachdaten.Ausgabe_Fachdaten)
@@ -42,6 +42,8 @@ class PlanProHelper(object):
             container = self.get_container_by_fachdaten_id(i)
             signals = container.Signal
             for signal in signals:
+                if signal.Signal_Real is None:
+                    continue  # No fictitious signals
                 if signal.Signal_Real.Signal_Real_Aktiv is None or (signal.Signal_Real.Signal_Real_Aktiv.Signal_Funktion.Wert != "Einfahr_Signal" and signal.Signal_Real.Signal_Real_Aktiv.Signal_Funktion.Wert != "Ausfahr_Signal" and signal.Signal_Real.Signal_Real_Aktiv.Signal_Funktion.Wert != "Block_Signal"):
                     continue  # take only Einfahr and Ausfahr signals
                 references = signal.Punkt_Objekt_TOP_Kante
