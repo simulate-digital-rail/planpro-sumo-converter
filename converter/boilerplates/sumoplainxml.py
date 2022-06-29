@@ -41,9 +41,9 @@ def get_routes_boilerplate_xml(routes_as_xml):
     file_content = ['<?xml version="1.0" encoding="UTF-8"?>',
                     '<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">',
                     "\t" + "\n\t".join(routes_as_xml),
-                    "\n\t<vType id=\"regio\" length=\"20.00\" vClass=\"rail\" color=\"193,18,28\" />",
-                    "\n\t<vType id=\"ice\" length=\"60.00\" vClass=\"rail_electric\" color=\"192,192,192\" />",
-                    "\n\t<vType id=\"cargo\" length=\"80.00\" vClass=\"rail\" color=\"30,30,30\" />",
+                    "\n\t<vType id=\"regio\" accel=\"2.5\" decel=\"1.3\" length=\"20.00\" vClass=\"rail\" color=\"193,18,28\" />",
+                    "\n\t<vType id=\"ice\" accel=\"5\" decel=\"1.3\" length=\"60.00\" vClass=\"rail_electric\" color=\"192,192,192\" />",
+                    "\n\t<vType id=\"cargo\" accel=\"2.5\" decel=\"1.3\" length=\"80.00\" vClass=\"rail\" color=\"30,30,30\" />",
                     "\n</routes>"]
     return "\n".join(file_content)
 
