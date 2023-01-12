@@ -17,9 +17,21 @@ def get_sumo_edge_xml(track):
 
 def get_sumo_point_connection_xml(point):
     if point.left is not None and point.right is not None:
-        return "\n".join([f"<!-- Point {point.id} {point.top_knoten_uuid} -->"
+        return "\n".join([f"<!-- Point {point.id} {point.top_knoten_uuid} -->",
                           f"<connection from=\"{point.left.id}\" to=\"{point.head.id}\"/>",
+                          f"<connection from=\"{point.left.id}\" to=\"{point.head.re_id}\"/>",
+                          f"<connection from=\"{point.left.re_id}\" to=\"{point.head.id}\"/>",
+                          f"<connection from=\"{point.left.re_id}\" to=\"{point.head.re_id}\"/>",
                           f"<connection from=\"{point.right.id}\" to=\"{point.head.id}\"/>",
+                          f"<connection from=\"{point.right.id}\" to=\"{point.head.re_id}\"/>",
+                          f"<connection from=\"{point.right.re_id}\" to=\"{point.head.id}\"/>",
+                          f"<connection from=\"{point.right.re_id}\" to=\"{point.head.re_id}\"/>",
+                          f"<connection from=\"{point.head.id}\" to=\"{point.left.id}\"/>",
+                          f"<connection from=\"{point.head.id}\" to=\"{point.right.id}\"/>",
+                          f"<connection from=\"{point.head.id}\" to=\"{point.left.re_id}\"/>",
+                          f"<connection from=\"{point.head.id}\" to=\"{point.right.re_id}\"/>",
+                          f"<connection from=\"{point.head.re_id}\" to=\"{point.left.id}\"/>",
+                          f"<connection from=\"{point.head.re_id}\" to=\"{point.right.id}\"/>",
                           f"<connection from=\"{point.head.re_id}\" to=\"{point.left.re_id}\"/>",
                           f"<connection from=\"{point.head.re_id}\" to=\"{point.right.re_id}\"/>"])
     else:  # Dead End
@@ -27,8 +39,14 @@ def get_sumo_point_connection_xml(point):
 
 
 def get_sumo_signal_connection_xml(signal):
-    return "\n".join([f"<!-- Signal {signal.id} {signal.signal_uuid} -->"
+    return "\n".join([f"<!-- Signal {signal.id} {signal.signal_uuid} -->",
                       f"<connection from=\"{signal.left_track.id}\" to=\"{signal.right_track.id}\"/>",
+                      f"<connection from=\"{signal.left_track.id}\" to=\"{signal.right_track.re_id}\"/>",
+                      f"<connection from=\"{signal.left_track.re_id}\" to=\"{signal.right_track.id}\"/>",
+                      f"<connection from=\"{signal.left_track.re_id}\" to=\"{signal.right_track.re_id}\"/>",
+                      f"<connection from=\"{signal.right_track.id}\" to=\"{signal.left_track.id}\"/>",
+                      f"<connection from=\"{signal.right_track.id}\" to=\"{signal.left_track.re_id}\"/>",
+                      f"<connection from=\"{signal.right_track.re_id}\" to=\"{signal.left_track.id}\"/>",
                       f"<connection from=\"{signal.right_track.re_id}\" to=\"{signal.left_track.re_id}\"/>"])
 
 

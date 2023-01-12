@@ -21,10 +21,10 @@ class SUMOHelper(object):
         self.sumocfg_file_path = os.path.join(folder, self.sumocfg_file_name)
 
     def create_output(self, converter):
-        self.write_nodes(converter.get_points(), converter.get_signals())
-        self.write_edges(converter.get_tracks())
-        self.write_connections_from_nodes(converter.get_points(), converter.get_signals())
-        self.write_routes(converter.get_running_tracks())
+        self.write_nodes(converter.points, converter.signals)
+        self.write_edges(converter.tracks)
+        self.write_connections_from_nodes(converter.points, converter.signals)
+        self.write_routes(converter.running_tracks)
         self.run_netconvert()
         self.write_sumo_scenario_config()
 
