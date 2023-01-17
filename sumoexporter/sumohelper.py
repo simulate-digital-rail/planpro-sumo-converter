@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from .boilerplates import sumoplainxml
 
 folder = 'sumo-config'
@@ -8,6 +9,8 @@ class SUMOHelper(object):
 
     def __init__(self, topology):
         filename = topology.name
+        Path(folder).mkdir(parents=True, exist_ok=True)
+
         self.nodes_file_path = os.path.join(folder, filename + ".nod.xml")
         self.edges_file_path = os.path.join(folder, filename + ".edg.xml")
         self.connections_file_path = os.path.join(folder, filename + ".con.xml")
