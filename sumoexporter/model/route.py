@@ -1,27 +1,19 @@
 from random import randint
 
 
-class RunningTrack(object):
+class Route(object):
 
-    def __init__(self, running_track_uuid):
-        self.running_track_uuid = running_track_uuid
+    def __init__(self, route_uuid):
+        self.route_uuid = route_uuid
         self.id = "route_none-none"
         self.start_signal = None
         self.end_signal = None
-        self.tracks = []
+        self.track_ids = []
 
         r = randint(0, 255)
         g = randint(0, 255)
         b = randint(0, 255)
         self.color = f"{r},{g},{b}"
-
-    def set_start_signal(self, start_signal):
-        self.start_signal = start_signal
-        self.update_id()
-
-    def set_end_signal(self, end_signal):
-        self.end_signal = end_signal
-        self.update_id()
 
     def update_id(self):
         first_part = "none"

@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "sumoexporter"
+version = "2.0.0"
+description = "An exporter to a SUMO scenario from a yaramo model"
+authors = ["Arne Boockmeyer <arne.boockmeyer@hpi.de>"]
+readme = "README.md"
+repository = "https://github.com/simulate-digital-rail/sumo-exporter"
+packages = [{include = "sumoexporter"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+yaramo = {git = "https://github.com/simulate-digital-rail/yaramo"}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -9,7 +9,6 @@ def get_sumo_signal_xml(signal):
 def get_sumo_edge_xml(track):
     shape_coords = " ".join(track.shape_coordinates)
     shape_coords_re = " ".join(reversed(track.shape_coordinates))
-
     return "\n".join([f"<!-- Track {track.top_kante_uuid} -->",
                       f"<edge id=\"{track.id}\" from=\"{track.left_point.id}\" to=\"{track.right_point.id}\" shape=\"{shape_coords}\" priority=\"-1\" numLanes=\"1\" speed=\"110.0\" allow=\"rail rail_electric\" spreadType=\"center\" />",
                       f"<edge id=\"{track.re_id}\" from=\"{track.right_point.id}\" to=\"{track.left_point.id}\" shape=\"{shape_coords_re}\" priority=\"-1\" numLanes=\"1\" speed=\"110.0\" allow=\"rail rail_electric\" spreadType=\"center\" />"])
@@ -17,9 +16,21 @@ def get_sumo_edge_xml(track):
 
 def get_sumo_point_connection_xml(point):
     if point.left is not None and point.right is not None:
-        return "\n".join([f"<!-- Point {point.id} {point.top_knoten_uuid} -->"
+        return "\n".join([f"<!-- Point {point.id} {point.top_knoten_uuid} -->",
                           f"<connection from=\"{point.left.id}\" to=\"{point.head.id}\"/>",
+                          f"<connection from=\"{point.left.id}\" to=\"{point.head.re_id}\"/>",
+                          f"<connection from=\"{point.left.re_id}\" to=\"{point.head.id}\"/>",
+                          f"<connection from=\"{point.left.re_id}\" to=\"{point.head.re_id}\"/>",
                           f"<connection from=\"{point.right.id}\" to=\"{point.head.id}\"/>",
+                          f"<connection from=\"{point.right.id}\" to=\"{point.head.re_id}\"/>",
+                          f"<connection from=\"{point.right.re_id}\" to=\"{point.head.id}\"/>",
+                          f"<connection from=\"{point.right.re_id}\" to=\"{point.head.re_id}\"/>",
+                          f"<connection from=\"{point.head.id}\" to=\"{point.left.id}\"/>",
+                          f"<connection from=\"{point.head.id}\" to=\"{point.right.id}\"/>",
+                          f"<connection from=\"{point.head.id}\" to=\"{point.left.re_id}\"/>",
+                          f"<connection from=\"{point.head.id}\" to=\"{point.right.re_id}\"/>",
+                          f"<connection from=\"{point.head.re_id}\" to=\"{point.left.id}\"/>",
+                          f"<connection from=\"{point.head.re_id}\" to=\"{point.right.id}\"/>",
                           f"<connection from=\"{point.head.re_id}\" to=\"{point.left.re_id}\"/>",
                           f"<connection from=\"{point.head.re_id}\" to=\"{point.right.re_id}\"/>"])
     else:  # Dead End
@@ -27,14 +38,20 @@ def get_sumo_point_connection_xml(point):
 
 
 def get_sumo_signal_connection_xml(signal):
-    return "\n".join([f"<!-- Signal {signal.id} {signal.signal_uuid} -->"
+    return "\n".join([f"<!-- Signal {signal.id} {signal.signal_uuid} -->",
                       f"<connection from=\"{signal.left_track.id}\" to=\"{signal.right_track.id}\"/>",
+                      f"<connection from=\"{signal.left_track.id}\" to=\"{signal.right_track.re_id}\"/>",
+                      f"<connection from=\"{signal.left_track.re_id}\" to=\"{signal.right_track.id}\"/>",
+                      f"<connection from=\"{signal.left_track.re_id}\" to=\"{signal.right_track.re_id}\"/>",
+                      f"<connection from=\"{signal.right_track.id}\" to=\"{signal.left_track.id}\"/>",
+                      f"<connection from=\"{signal.right_track.id}\" to=\"{signal.left_track.re_id}\"/>",
+                      f"<connection from=\"{signal.right_track.re_id}\" to=\"{signal.left_track.id}\"/>",
                       f"<connection from=\"{signal.right_track.re_id}\" to=\"{signal.left_track.re_id}\"/>"])
 
 
-def get_sumo_route_xml(running_track):
-    track_ids = " ".join(running_track.tracks)
-    return f"<route edges=\"{track_ids}\" color=\"{running_track.color}\" id=\"{running_track.id}\"/>"
+def get_sumo_route_xml(route):
+    track_ids = " ".join(route.track_ids)
+    return f"<route edges=\"{track_ids}\" color=\"{route.color}\" id=\"{route.id}\"/>"
 
 
 def get_routes_boilerplate_xml(routes_as_xml):
