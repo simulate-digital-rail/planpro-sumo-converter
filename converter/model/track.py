@@ -28,3 +28,7 @@ class Track(object):
 
     def add_shape_coordinates(self, new_coordinates):
         self.shape_coordinates.append(new_coordinates)
+
+    def __str__(self):
+        return self.top_kante_uuid
+

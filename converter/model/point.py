@@ -17,7 +17,7 @@ class Point(object):
     def set_left_edge(self, left):
         self.left = left
 
-    def set_right_edge_(self, right):
+    def set_right_edge(self, right):
         self.right = right
 
     def set_head_edge(self, head):
@@ -34,3 +34,6 @@ class Point(object):
         if self.head is not None and self.head.top_kante_uuid == top_kante_uuid:
             return self.head
         return None
+
+    def __str__(self):
+        return self.top_knoten_uuid

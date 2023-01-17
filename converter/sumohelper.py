@@ -6,25 +6,26 @@ folder = 'sumo-config'
 
 class SUMOHelper(object):
 
-    def __init__(self, plan_pro_file_name):
-        self.nodes_file_path = os.path.join(folder, plan_pro_file_name + ".nod.xml")
-        self.edges_file_path = os.path.join(folder, plan_pro_file_name + ".edg.xml")
-        self.connections_file_path = os.path.join(folder, plan_pro_file_name + ".con.xml")
+    def __init__(self, topology):
+        filename = topology.name
+        self.nodes_file_path = os.path.join(folder, filename + ".nod.xml")
+        self.edges_file_path = os.path.join(folder, filename + ".edg.xml")
+        self.connections_file_path = os.path.join(folder, filename + ".con.xml")
 
-        self.routes_file_name = plan_pro_file_name + ".routes.xml"
+        self.routes_file_name = filename + ".routes.xml"
         self.routes_file_path = os.path.join(folder, self.routes_file_name)
 
-        self.net_file_name = plan_pro_file_name + ".net.xml"
+        self.net_file_name = filename + ".net.xml"
         self.net_file_path = os.path.join(folder, self.net_file_name)
 
-        self.sumocfg_file_name = plan_pro_file_name + ".scenario.sumocfg"
+        self.sumocfg_file_name = filename + ".scenario.sumocfg"
         self.sumocfg_file_path = os.path.join(folder, self.sumocfg_file_name)
 
     def create_output(self, converter):
         self.write_nodes(converter.points, converter.signals)
         self.write_edges(converter.tracks)
         self.write_connections_from_nodes(converter.points, converter.signals)
-        self.write_routes(converter.running_tracks)
+        self.write_routes(converter.routes)
         self.run_netconvert()
         self.write_sumo_scenario_config()
 
