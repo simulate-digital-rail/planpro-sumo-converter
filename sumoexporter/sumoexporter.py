@@ -8,15 +8,14 @@ from yaramo.signal import SignalDirection
 
 class SUMOExporter(object):
 
-    def __init__(self):
-        self.topology = None
+    def __init__(self, topology):
+        self.topology = topology
         self.points = dict()
         self.tracks = dict()
         self.routes = dict()
         self.signals = dict()
 
-    def convert(self, topology):
-        self.topology = topology
+    def convert(self):
         self.convert_topology()
         self.convert_routes()
 
