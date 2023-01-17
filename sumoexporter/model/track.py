@@ -11,21 +11,6 @@ class Track(object):
         self.signals = None
         self.shape_coordinates = []
 
-    def set_top_kante_length(self, length):
-        self.top_kante_length = length
-
-    def set_left_point(self, left_point):
-        self.left_point = left_point
-
-    def set_right_point(self, right_point):
-        self.right_point = right_point
-
-    def set_geo_kanten(self, geo_kanten):
-        self.geo_kanten = geo_kanten
-
-    def set_signals(self, signals):
-        self.signals = signals
-
     def add_shape_coordinates(self, new_coordinates):
         self.shape_coordinates.append(new_coordinates)
 

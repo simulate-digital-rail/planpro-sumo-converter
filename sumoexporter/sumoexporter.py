@@ -24,7 +24,8 @@ class SUMOExporter(object):
         for yaramo_node_uuid in self.topology.nodes:
             yaramo_node = self.topology.nodes[yaramo_node_uuid]
             point_obj = Point(yaramo_node.uuid, yaramo_node.geo_node.uuid)
-            point_obj.set_coordinates(yaramo_node.geo_node.geo_point.x, yaramo_node.geo_node.geo_point.y)
+            point_obj.x = yaramo_node.geo_node.geo_point.x
+            point_obj.y = yaramo_node.geo_node.geo_point.y
             self.points[yaramo_node.uuid] = point_obj
 
         # Tracks and signals
@@ -93,7 +94,7 @@ class SUMOExporter(object):
                         cur_track_top_kanten_counter = cur_track_top_kanten_counter + 1
                         cur_track_obj = Track(yaramo_edge.uuid, cur_track_top_kanten_counter)
                         cur_track_obj.add_shape_coordinates(f"{cur_signal.x},{cur_signal.y}")
-                        cur_track_obj.set_top_kante_length(yaramo_edge.length)
+                        cur_track_obj.top_kante_length = yaramo_edge.length
                         tracks_in_order.append(cur_track_obj)
                         cur_signal.right_track = cur_track_obj
                         cur_track_obj.left_point = cur_signal
@@ -117,20 +118,20 @@ class SUMOExporter(object):
                 anschluss_b = yaramo_node_b.get_anschluss_of_other(yaramo_node_a)
 
             if anschluss_a == NodeConnectionDirection.Spitze:
-                node_a.set_head_edge(tracks_in_order[0])
+                node_a.head = tracks_in_order[0]
             elif anschluss_a == NodeConnectionDirection.Links:
-                node_a.set_left_edge(tracks_in_order[0])
+                node_a.left = tracks_in_order[0]
             elif anschluss_a == NodeConnectionDirection.Rechts:
-                node_a.set_right_edge(tracks_in_order[0])
+                node_a.right = tracks_in_order[0]
             else:
                 raise ValueError("Topology broken. Anschluss not found.")
 
             if anschluss_b == NodeConnectionDirection.Spitze:
-                node_b.set_head_edge(tracks_in_order[-1])
+                node_b.head = tracks_in_order[-1]
             elif anschluss_b == NodeConnectionDirection.Links:
-                node_b.set_left_edge(tracks_in_order[-1])
+                node_b.left = tracks_in_order[-1]
             elif anschluss_b == NodeConnectionDirection.Rechts:
-                node_b.set_right_edge(tracks_in_order[-1])
+                node_b.right = tracks_in_order[-1]
             else:
                 raise ValueError("Topology broken. Anschluss not found.")
 
