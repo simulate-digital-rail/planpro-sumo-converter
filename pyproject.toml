@@ -2,8 +2,9 @@
 name = "sumoexporter"
 version = "2.0.0"
 description = "An exporter to a SUMO scenario from a yaramo model"
-authors = ["Arne Boockmeyer <github@arneboockmeyer.de>"]
+authors = ["Arne Boockmeyer <arne.boockmeyer@hpi.de>"]
 readme = "README.md"
+repository = "https://github.com/simulate-digital-rail/sumo-exporter"
 packages = [{include = "sumo_exporter"}]
 
 [tool.poetry.dependencies]
