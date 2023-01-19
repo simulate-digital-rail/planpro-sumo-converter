@@ -10,6 +10,8 @@ packages = [{include = "sumoexporter"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 yaramo = {git = "https://github.com/simulate-digital-rail/yaramo"}
+planpro_importer = {git = "https://github.com/simulate-digital-rail/planpro-importer"}
+railway-route-generator = {git = "https://github.com/simulate-digital-rail/railway-route-generator"}
 
 [build-system]
 requires = ["poetry-core"]
