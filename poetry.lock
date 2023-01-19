@@ -16,7 +16,7 @@ files = [
 name = "lxml"
 version = "4.9.2"
 description = "Powerful and Pythonic XML processing library combining libxml2/libxslt with the ElementTree API."
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, != 3.4.*"
 files = [
@@ -109,7 +109,7 @@ source = ["Cython (>=0.29.7)"]
 name = "planpro-importer"
 version = "1.9.0"
 description = ""
-category = "main"
+category = "dev"
 optional = false
 python-versions = "^3.10"
 files = []
@@ -178,7 +178,7 @@ certifi = "*"
 name = "railway-route-generator"
 version = "3.0.0"
 description = ""
-category = "main"
+category = "dev"
 optional = false
 python-versions = "^3.10"
 files = []
@@ -197,7 +197,7 @@ resolved_reference = "4a98c33287e3b9b626195962e016a8fe6dbe2008"
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 files = [
@@ -227,4 +227,4 @@ resolved_reference = "c0a17eeba0302c6846b86e5d579d837070055d3d"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "611126acb31ab3b473dbd363fd3e61b88decc1d98fc937919d7792eb904174c0"
+content-hash = "46a5fc65405ee786e98d2b1b906f0a72a2bd2a734c5d51293382be0ea3f38578"
