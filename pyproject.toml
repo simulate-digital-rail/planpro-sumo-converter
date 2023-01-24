@@ -11,6 +11,13 @@ packages = [{include = "sumoexporter"}]
 python = "^3.10"
 yaramo = {git = "https://github.com/simulate-digital-rail/yaramo"}
 
+[tool.poetry.group.example]
+optional = true
+
+[tool.poetry.group.example.dependencies]
+planpro_importer = {git = "https://github.com/simulate-digital-rail/planpro-importer"}
+railway-route-generator = {git = "https://github.com/simulate-digital-rail/railway-route-generator"}
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
