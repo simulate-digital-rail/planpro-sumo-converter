@@ -21,17 +21,21 @@ class SUMOExporter(object):
 
     def convert_topology(self):
         # Nodes
+        def _get_coords_of_yaramo_geo_node(_geo_node):
+            _converted_geo_point = _geo_node.geo_point.to_dbref()
+            _x_shift = 4533770.0  # To shift the coordinate system close to 0,0
+            _y_shift = 5625780.0
+            return _converted_geo_point.x - _x_shift, _converted_geo_point.y - _y_shift
+
         for yaramo_node_uuid in self.topology.nodes:
             yaramo_node = self.topology.nodes[yaramo_node_uuid]
             point_obj = Point(yaramo_node.uuid, yaramo_node.geo_node.uuid)
-            point_obj.x = yaramo_node.geo_node.geo_point.x
-            point_obj.y = yaramo_node.geo_node.geo_point.y
+            converted_x, converted_y = _get_coords_of_yaramo_geo_node(yaramo_node.geo_node)
+            point_obj.x = converted_x
+            point_obj.y = converted_y
             self.points[yaramo_node.uuid] = point_obj
 
         # Tracks and signals
-        def _get_coords_of_yaramo_geo_node(_geo_node):
-            return _geo_node.geo_point.x, _geo_node.geo_point.y
-
         def _calc_length_of_yaramo_geo_nodes(_geo_node_a, _geo_node_b):
             _x1, _y1 = _get_coords_of_yaramo_geo_node(_geo_node_a)
             _x2, _y2 = _get_coords_of_yaramo_geo_node(_geo_node_b)
