@@ -201,7 +201,8 @@ class SUMOExporter(object):
 
             return _track_ids
 
-        for yaramo_route in self.topology.routes:
+        for yaramo_route_uuid in self.topology.routes:
+            yaramo_route = self.topology.routes[yaramo_route_uuid]
             route = Route(yaramo_route.uuid)
 
             # Start and End Signal

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sumoexporter"
-version = "2.0.0"
+version = "2.0.1"
 description = "An exporter to a SUMO scenario from a yaramo model"
 authors = ["Arne Boockmeyer <arne.boockmeyer@hpi.de>"]
 readme = "README.md"
